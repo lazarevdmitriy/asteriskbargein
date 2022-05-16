@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- UniMRCP client document -->
+<unimrcpclient xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="../unimrcpclient.xsd"
+               version="1.0">
+  <settings>
+    <sip-settings id="tts-sip">
+      <!--
+        Server IP address can explicitly be specified per "sip-settings". Otherwise, the server IP
+        address defaults to "server-ip" set in the properties, which in turn defaults to "ip".
+        -->
+      <server-ip>10.2.0.9</server-ip>
+      <server-port>8000</server-port>
+      <!-- <force-destination>true</force-destination> -->
+    </sip-settings>
+    <rtp-settings id="tts-rtp">
+      <jitter-buffer>
+        <adaptive>1</adaptive>
+        <playout-delay>50</playout-delay>
+        <max-playout-delay>600</max-playout-delay>
+        <time-skew-detection>1</time-skew-detection>
+      </jitter-buffer>
+      <ptime>20</ptime>
+      <codecs>PCMU PCMA L16/96/8000 telephone-event/101/8000</codecs>
+      <!-- Enable/disable RTCP support -->
+      <rtcp enable="false">
+        <!--
+            RTCP BYE policies (RTCP must be enabled first)
+            0 - disable RTCP BYE
+            1 - send RTCP BYE at the end of session
+            2 - send RTCP BYE also at the end of each talkspurt (input)
+        -->
+        <rtcp-bye>2</rtcp-bye>
+        <!-- RTCP transmission interval in msec (set 0 to disable) -->
+        <tx-interval>5000</tx-interval>
+        <!-- Period (timeout) to check for new RTCP messages in msec (set 0 to disable) -->
+        <rx-resolution>1000</rx-resolution>
+      </rtcp>
+    </rtp-settings>
+  </settings>
+
+  <profiles>
+    <mrcpv2-profile id="tts">
+      <sip-uac>SIP-Agent-1</sip-uac>
+      <mrcpv2-uac>MRCPv2-Agent-1</mrcpv2-uac>
+      <media-engine>Media-Engine-1</media-engine>
+      <rtp-factory>RTP-Factory-1</rtp-factory>
+      <sip-settings>tts-sip</sip-settings>
+      <rtp-settings>tts-rtp</rtp-settings>
+    </mrcpv2-profile>
+  </profiles>
+</unimrcpclient>
