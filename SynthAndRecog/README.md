@@ -3,10 +3,22 @@
 
 # Установка
 - Переходим в `Настройки-Телефония-Расширенные настройки` добавляем в `Настройка MRCP` новый профиль `tts`, указав параметры MRCP сервера синтеза. Указываем его по умолчанию для синтеза `default-tts-profile = tts`. Пример в `examples/mrcp.conf`.
-- Заменяем в базе процедуру `__phoneGetIVR.sql`. Например `zcat __phoneGetIVR.sql | mysql -u $user --password=$pass -h $host $base`.
+- Заменяем в базе процедуру `_phoneGetIVR.sql`. Например `zcat _phoneGetIVR.sql | mysql -u $user --password=$pass -h $host $base`.
+- В настройках словаря в разделе `Настройка-Система-Речь-ОНЛАЙН-РАСПОЗНАВАНИЕ` в словарях убрать не поддерживаемый парамерт `i=any`. Проверяем настройки mrcp.
 - Заставляем сформировать диалплан командой `mysql -u $user --password=$pass -h $host $base -e  "update updated set is_updated=2;"`
-- При необходимости создаем unimrcp профиль `/usr/local/unimrcp/conf/client-profiles/tts.xml` и правим настройки клиента `/usr/local/unimrcp/conf/unimrcpclient.xml`. Пример в `examples/tts.xml` и `examples/unimrcpclient.xml`.
-- Не забываем открыть порты указанные в профиле. Например указанные в `examples/mrcp.conf` `38000-39000/udp` и `8062/tcp`.
+- Cоздаем unimrcp профиль `/usr/local/unimrcp/conf/client-profiles/tts.xml`. Пример в `examples/tts.xml`.
+- Не забываем открыть порты указанные в профиле. Например указанные в `examples/mrcp.conf` `38000-39000/udp` и `8062/tcp` командой `firewall-cmd --zone=public --permanent --add-port=38000-39000/udp --add-port=8062/tcp && firewall-cmd --reload`
+
+# Замечания
+В начале функции `_phoneGetIVR.sql` вынесены настройки параметров синтеза. Можно настроить голос, pitch, volume, rate.
+
+```
+DECLARE voice VARCHAR(20) DEFAULT 'vera';
+DECLARE voice INT DEFAULT 100;
+DECLARE pitch INT DEFAULT 140;
+DECLARE volume INT DEFAULT 100;
+DECLARE rate INT DEFAULT 100;
+```
 
 # Использование
 - В выбранном IVR диалоге на вкладке `Приветвия` указываем `Возможность прерывания приветствия`. 
