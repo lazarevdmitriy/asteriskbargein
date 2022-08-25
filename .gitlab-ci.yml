@@ -6,7 +6,7 @@ staging:
   tags: ["docker"]
   image: alpine
   before_script:
-    - apk add openssh-client rsync
+    - apk add openssh-client rsync gettext
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
     - mkdir -p ~/.ssh
