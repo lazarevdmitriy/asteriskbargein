@@ -9,7 +9,7 @@
         Server IP address can explicitly be specified per "sip-settings". Otherwise, the server IP
         address defaults to "server-ip" set in the properties, which in turn defaults to "ip".
         -->
-      <server-ip>10.2.0.9</server-ip>
+      <server-ip>$server_ip</server-ip>
       <server-port>8000</server-port>
       <!-- <force-destination>true</force-destination> -->
     </sip-settings>
