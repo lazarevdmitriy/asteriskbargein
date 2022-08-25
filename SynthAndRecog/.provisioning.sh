@@ -15,7 +15,6 @@ envsubst < examples/tts.xml > /usr/local/unimrcp/conf/client-profiles/tts.xml
 mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param = REPLACE(param, '&i=any','') WHERE type = 'SpeechRecognitionConnector';"
 mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param = REPLACE(param, 'b=1&','') WHERE type = 'SpeechRecognitionConnector';"
 
-mysql -u $user --password=$pass -h $host $base -e  "DROP FUNCTION IF EXISTS _phoneGetIVR;"
 zcat _phoneGetIVR.sql.gz | mysql -u $user --password=$pass -h $host $base
 
 mysql -u $user --password=$pass -h $host $base -e  "update updated set is_updated=2;"
