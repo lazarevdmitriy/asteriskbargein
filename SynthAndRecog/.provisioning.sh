@@ -9,9 +9,6 @@ cd "$(dirname "$0")"
 # export TTS_SERVER=10.3.0.9
 # export QA_SERVER=10.3.0.19
 
-#envsubst < examples/mrcpconnectors.conf > /etc/asterisk/mrcpconnectors.conf
-#envsubst < examples/tts.xml > /usr/local/unimrcp/conf/client-profiles/tts.xml
-
 cp -R .mrcpconnectors.conf /etc/asterisk/mrcpconnectors.conf
 cp -R .tts.xml /usr/local/unimrcp/conf/client-profiles/tts.xml
 
@@ -19,6 +16,7 @@ mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param 
 mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param = REPLACE(param, 'b=1&','') WHERE type = 'SpeechRecognitionConnector';"
 
 zcat _phoneGetIVR.sql.gz | mysql -u $user --password=$pass -h $host $base
+zcat phone_options.sql.gz | mysql -u $user --password=$pass -h $host $base
 
 mysql -u $user --password=$pass -h $host $base -e  "update updated set is_updated=2;"
 firewall-cmd --zone=public --permanent --add-port=38000-39000/udp --add-port=8062/tcp && firewall-cmd --reload

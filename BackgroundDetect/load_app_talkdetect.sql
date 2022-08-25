@@ -1,0 +1,115 @@
+DELIMITER ;;
+UPDATE voicetech.phone_options
+	SET `options`='[modules]
+; включаем автозагрузку модулей
+autoload=yes
+
+; отключаем ненужные модули
+noload => pbx_gtkconsole.so
+noload => pbx_kdeconsole.so
+noload => app_intercom.so
+noload => chan_modem.so
+noload => chan_modem_aopen.so
+noload => chan_modem_bestdata.so
+noload => chan_modem_i4l.so
+noload => chan_capi.so
+noload => chan_alsa.so
+noload => chan_oss.so
+noload => cdr_sqlite.so
+noload => app_directory_odbc.so
+noload => res_config_pgsql.so
+noload => app_adsiprog.so
+noload => app_alarmreceiver.so
+noload => app_amd.so
+noload => app_celgenuserevent.so
+noload => app_dictate.so
+noload => app_directory.so
+noload => app_echo.so
+noload => app_festival.so
+noload => app_followme.so
+noload => app_forkcdr.so
+noload => app_getcpeid.so
+noload => app_ices.so
+noload => app_image.so
+noload => app_jack.so
+noload => app_minivm.so
+noload => app_morsecode.so
+noload => app_mp3.so
+noload => app_nbscat.so
+noload => app_saycountpl.so
+noload => app_sayunixtime.so
+noload => app_sendtext.so
+noload => app_sms.so
+noload => app_speech_utils.so
+noload => app_test.so
+noload => app_url.so
+noload => app_voicemail.so
+noload => app_zapateller.so
+noload => cdr_pgsql.so
+noload => cdr_mysql.so
+noload => res_config_mysql.so
+noload => cdr_radius.so
+noload => cdr_sqlitere3_custom.so
+noload => cdr_syslog.so
+noload => cdr_tds.so
+noload => cdr_odbc.so
+noload => cel_custom.so
+noload => cel_manager.so
+noload => cel_odbc.so
+noload => cel_pgsql.so
+noload => cel_radius.so
+noload => cel_sqlite3_custom.so
+noload => cel_tds.so
+noload => chan_iax2.so
+noload => chan_motif.so
+noload => chan_oss.so
+noload => chan_skinny.so
+noload => chan_unistim.so
+noload => codec_adpcm.so
+noload => codec_g722.so
+noload => codec_g726.so
+noload => codec_lpc10.so
+noload => codec_speex.so
+noload => format_g719.so
+noload => format_g723.so
+noload => format_g726.so
+noload => format_ilbc.so
+noload => format_jpeg.so
+noload => format_ogg_vorbis.so
+noload => format_siren14.so
+noload => format_siren7.so
+noload => format_sln.so
+noload => format_vox.so
+noload => func_aes.so
+noload => func_audiohookinherit.so
+noload => func_curl.so
+noload => pbx_ael.so
+noload => pbx_dundi.so
+noload => pbx_lua.so
+noload => res_adsi.so
+noload => res_ael_share.so
+noload => res_calendar.so
+noload => res_calendar_caldav.so
+noload => res_calendar_ews.so
+noload => res_calendar_exchange.so
+noload => res_calendar_icalendar.so
+noload => res_config_curl.so
+noload => res_config_sqlite.so
+noload => res_config_sqlite3.so
+noload => res_curl.so
+noload => res_fax.so
+noload => res_fax_spandsp.so
+noload => res_format_attr_celt.so
+noload => res_format_attr_silk.so
+noload => res_smdi.so
+noload => res_snmp.so
+noload => res_xmpp.so
+noload => app_talkdetect.so
+
+; Принудительная загрузка
+load => res_musiconhold.so
+load => res_config_odbc.so
+'
+	WHERE id='modules.conf';
+
+;;
