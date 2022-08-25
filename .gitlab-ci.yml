@@ -1,0 +1,18 @@
+stages:
+  - staging
+  
+staging:
+  stage: staging
+  tags: ["docker"]
+  image: alpine
+  before_script:
+    - apk add openssh-client rsync
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh -o StrictHostKeyChecking=no root@$QA_SERVER "bash /srv/asteriskbargein/SynthAndRecog/.provisioning.sh"
+  environment:
+    name: staging
+    url: $QA_URL
