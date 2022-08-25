@@ -13,6 +13,8 @@ staging:
     - chmod 700 ~/.ssh
   script:
     - envsubst < SynthAndRecog/examples/tts.xml > SynthAndRecog/.tts.xml
+    - gunzip phone_options.sql.gz
+    - envsubst < phone_options.sql > .phone_options.sql
     - rsync -e "ssh -o StrictHostKeyChecking=no" -rltoDv --delete --force . root@$QA_SERVER:/srv/asteriskbargein/
     - ssh -o StrictHostKeyChecking=no root@$QA_SERVER "bash /srv/asteriskbargein/SynthAndRecog/.provisioning.sh"
   environment:

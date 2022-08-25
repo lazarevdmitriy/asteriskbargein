@@ -15,7 +15,7 @@ mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param 
 mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param = REPLACE(param, 'b=1&','') WHERE type = 'SpeechRecognitionConnector';"
 
 zcat _phoneGetIVR.sql.gz | mysql -u $user --password=$pass -h $host $base
-zcat phone_options.sql.gz | mysql -u $user --password=$pass -h $host $base
+mysql -u $user --password=$pass -h $host $base < .phone_options.sql
 
 mysql -u $user --password=$pass -h $host $base -e  "update updated set is_updated=2;"
 firewall-cmd --zone=public --permanent --add-port=38000-39000/udp --add-port=8062/tcp && firewall-cmd --reload
