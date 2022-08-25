@@ -9,8 +9,11 @@ cd "$(dirname "$0")"
 # export TTS_SERVER=10.3.0.9
 # export QA_SERVER=10.3.0.19
 
-envsubst < examples/mrcpconnectors.conf > /etc/asterisk/mrcpconnectors.conf
-envsubst < examples/tts.xml > /usr/local/unimrcp/conf/client-profiles/tts.xml
+#envsubst < examples/mrcpconnectors.conf > /etc/asterisk/mrcpconnectors.conf
+#envsubst < examples/tts.xml > /usr/local/unimrcp/conf/client-profiles/tts.xml
+
+cp -R .mrcpconnectors.conf /etc/asterisk/mrcpconnectors.conf
+cp -R .tts.xml /usr/local/unimrcp/conf/client-profiles/tts.xml
 
 mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param = REPLACE(param, '&i=any','') WHERE type = 'SpeechRecognitionConnector';"
 mysql -u $user --password=$pass -h $host $base -e  "UPDATE connectors SET param = REPLACE(param, 'b=1&','') WHERE type = 'SpeechRecognitionConnector';"

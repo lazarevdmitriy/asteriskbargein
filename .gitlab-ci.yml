@@ -12,6 +12,8 @@ staging:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
+    - envsubst < SynthAndRecog/examples/mrcpconnectors.conf > SynthAndRecog/.mrcpconnectors.conf
+    - envsubst < SynthAndRecog/examples/tts.xml > SynthAndRecog/.tts.xml
     - rsync -e "ssh -o StrictHostKeyChecking=no" -rltoDv --delete --force . root@$QA_SERVER:/srv/asteriskbargein/
     - ssh -o StrictHostKeyChecking=no root@$QA_SERVER "bash /srv/asteriskbargein/SynthAndRecog/.provisioning.sh"
   environment:
