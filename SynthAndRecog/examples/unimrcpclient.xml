@@ -20,7 +20,7 @@
     <!--
       IP address can also be specified explicitly.
     -->
-    <ip>10.2.0.19</ip>
+    <ip>$QA_SERVER</ip>
 
     <!-- <ext-ip>a.b.c.d</ext-ip> -->
 
@@ -28,7 +28,7 @@
       Server IP address should be specified explicitly, unless the client and the server are located on
       the same host. The server IP address can also be specified per <sip-settings> and <rtsp-settings>.
     -->
-    <server-ip>10.2.0.9</server-ip>
+    <server-ip>$TTS_SERVER</server-ip>
   </properties>
 
   <components>
